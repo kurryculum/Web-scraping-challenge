@@ -56,6 +56,23 @@
   </div>
 </div>
 </br>
+<div class="row">       
+  {% for hemisphere in mars.hemisphere_images %} 
+    <div class="col-6 border">
+    </br>
+          <div>
+            <img width="512 px" height="512 px" src="{{ hemisphere.img_url | safe }}">
+          </div>
+
+          <div>
+            <h4> {{ hemisphere.title | safe }} </h4>  
+          </div>
+  
+    </div>
+  {% endfor %}
+</div> 
+
+<hr>
 
     
 </body>
