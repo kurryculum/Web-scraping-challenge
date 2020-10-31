@@ -10,9 +10,12 @@ import requests
 import json
 from splinter import Browser
 import time
+import urllib.request
+import ssl
+
 # from selenium import webdriver
 
-def scrape():
+ssl._create_default_https_context = ssl._create_unverified_context
     
     
 
@@ -29,15 +32,21 @@ def scrape():
 
 
 # URL of page to be scraped
-    url= 'https://mars.nasa.gov/news'
-
+    
 
     # In[4]:
 
 
     # Retrieve page with the requests module
+def init_browser():
     executable_path = {'executable_path': '/usr/local/bin/chromedriver'}
-    browser = Browser('chrome', **executable_path, headless=False)
+    return Browser('chrome', **executable_path, headless=False)
+
+def scrape():
+    browser = init_browser()
+
+    url= 'https://mars.nasa.gov/news'
+
 
     browser.visit(url)
     time.sleep(3)
@@ -215,12 +224,7 @@ def scrape():
     # In[29]:
 
 
-    T=[]
-    titles=soup.find_all("h3")
-    for title in titles:
-        # print(title.text)
-        T1=T.append(title.text)
-
+    
 
     # In[30]:
 
@@ -231,18 +235,11 @@ def scrape():
     # In[31]:
 
 
-    U=[]
-    itemLink_list=browser.find_by_css('.itemLink')
-    for i in itemLink_list:
-        if "Enhanced" in i.text:
-            # print(i["href"])
-            U1=U.append(i["href"])
+   
 
 
     # In[32]:
 
-
-    [ {"titles":t,"Url":u}for t,u in zip (T,U)]
 
 
     # In[43]:
